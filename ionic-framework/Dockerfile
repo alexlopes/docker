@@ -1,11 +1,11 @@
 FROM     ubuntu:14.04.4
-MAINTAINER bitard [dot] michael [at] gmail [dot] com
+MAINTAINER alex [dot] unix [at] yahoo [dot] com
 
 ENV DEBIAN_FRONTEND=noninteractive \
     ANDROID_HOME=/opt/android-sdk-linux \
     NODE_VERSION=5.6.0 \
     NPM_VERSION=3.7.4 \
-    IONIC_VERSION=1.7.14 \
+    IONIC_VERSION=beta \
     BOWER_VERSION=1.7.7 \
     CORDOVA_VERSION=6.0.0 \
     GRUNT_VERSION=0.1.13 \
@@ -24,7 +24,7 @@ RUN apt-get update &&  \
 
     gem install sass && \
 
-    ionic start myApp sidemenu && \
+    #ionic start myApp sidemenu && \
 
 
 
@@ -65,6 +65,8 @@ COPY tools /opt/tools
 RUN ["/opt/tools/android-accept-licenses.sh", "android update sdk --all --no-ui --filter platform-tools,tools,build-tools-23.0.2,android-23,extra-android-support,extra-android-m2repository,extra-google-m2repository"]
 RUN unzip ${ANDROID_HOME}/temp/*.zip -d ${ANDROID_HOME}
 
-WORKDIR myApp
+VOLUME ["/ds/app"]
+
+WORKDIR "/ds/app"
 EXPOSE 8100 35729
-CMD ["ionic", "serve"]
+#CMD ["ionic", "serve"]
